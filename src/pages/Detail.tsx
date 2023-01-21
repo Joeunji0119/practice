@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from "react";
+import * as React from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useGetData } from "../Context";
+import { DataType, useGetData } from "../Context";
 
 const Detail = () => {
   const params = useParams();
-  const [user, setUser] = useState([]);
-  const { data } = useGetData();
+  const [user, setUser] = useState<DataType>();
+  const { datas } = useGetData();
 
   useEffect(() => {
-    const [filter] = data.filter(({ id }) => id === Number(params.id));
+    const [filter] = datas.filter(
+      ({ id }: { id: number }) => id === Number(params.id)
+    );
     setUser(filter);
-  }, [params.id, data]);
+  }, [params.id, datas]);
 
   return (
     <section>

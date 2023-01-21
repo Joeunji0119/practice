@@ -1,8 +1,8 @@
+import * as React from "react";
 import { createRoot } from "react-dom/client";
-
 import Router from "./Router";
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById("root") as HTMLElement;
 const root = createRoot(rootElement);
 
 root.render(<Router />);
