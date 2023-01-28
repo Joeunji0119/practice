@@ -14,10 +14,18 @@ type DataTypes = {
   setDatas: React.Dispatch<React.SetStateAction<DataType[]>>;
 };
 
+// type DataTypes = {
+//   memoizedValue: {
+//     datas: DataType[];
+//     setDatas: React.Dispatch<React.SetStateAction<DataType[]>>;
+//   };
+// };
 export const DataContext = createContext<DataTypes>(null);
 
 export const Context = ({ children }: { children: React.ReactNode }) => {
   const [datas, setDatas] = useState<DataType[]>([]);
+
+  // const memoizedValue = React.useMemo(() => ({ datas, setDatas }), [datas]);
 
   return (
     <DataContext.Provider value={{ datas, setDatas }}>

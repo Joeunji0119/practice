@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
-    "jsx": "react",
+    "jsx": "react-jsx",
     "target": "es5",
     "module": "commonjs", //require 문법
     "noImplicitAny": true, // any 에러
     "allowJs": true, // js 파일들 ts에서 import 해서 쓸 수 있는지
     "declaration": true, //컴파일시 .d.ts 파일도 자동으로 함께생성
     "noUnusedLocals": true, //쓰지않는 지역변수 있으면 에러내기
-    "noUnusedParameters": true //쓰지않는 파라미터 있으면 에러내기
+    "noUnusedParameters": true, //쓰지않는 파라미터 있으면 에러내기
+    "jsxImportSource": "@emotion/react" // emotion 컴포넌트마다 주석달기 귀찮아서
   },
   "include": ["./src/"]
 }
