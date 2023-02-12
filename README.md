@@ -3,7 +3,7 @@
 - ts Migration
 - Searching Type
 - context API
-- redex
+- redux
 - emotionjs
 - createPortal (모달)
 
