@@ -5,6 +5,8 @@ import { Context } from './Context';
 import Promise from './pages/Promise';
 import Modal from './components/modal/Modal';
 import App from './pages/App';
+import Slider from './pages/Slider';
+import Counter from './pages/Counter';
 
 const Router = () => {
 	return (
@@ -12,9 +14,11 @@ const Router = () => {
 			<Context>
 				<Routes>
 					<Route path='/' element={<App />} />
+					<Route path='/count' element={<Counter />} />
 					<Route path='/detail/:id' element={<Detail />} />
 					<Route path='/promise' element={<Promise />} />
 					<Route path='/Modal' element={<Modal />} />
+					<Route path='/slider' element={<Slider />} />
 				</Routes>
 			</Context>
 		</BrowserRouter>

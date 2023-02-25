@@ -1,6 +1,8 @@
-import { useReducer, useState } from 'react';
+import * as React from 'react';
+import { useCallback, useReducer, useState, useRef } from 'react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
 import { useGetData } from '../Context';
 
 const reducer = (state: number, action: { type: string }) => {
@@ -37,16 +39,25 @@ const List = () => {
 		},
 	]);
 
-	const onchange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const { name, value } = e.target;
+	const onchange = useCallback(
+		(e: React.ChangeEvent<HTMLInputElement>) => {
+			const { name, value } = e.target;
 
-		const bundleInfo = {
-			...info,
-			[name]: value,
-		};
+			const bundleInfo = {
+				...info,
+				[name]: value,
+			};
 
-		setInfo(bundleInfo);
-	};
+			setInfo(bundleInfo);
+		},
+		[info]
+	);
+
+	/* 
+   매번 함수가 새로 만들어지는 구조라면 최적화 하지 못함
+   함수를 재사용하기 위해 useCallback 사용
+   비슷한 예로 useMemo가 있음
+  */
 
 	const toPlus = () => {
 		dispatch({
@@ -62,17 +73,46 @@ const List = () => {
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		setInfos([...infos, info]);
+		setInfos(infos => [...infos, info]);
 		setInfo({
 			name: ' ',
 			email: ' ',
 		});
 	};
 
-	useEffect(() => {
-		fetch('https://reqres.in/api/users')
+	// 무한스크롤 공부
+	const target = useRef<any>(null);
+	const page = useRef<number>(1);
+
+	const option: unknown = {
+		root: null,
+		rootMargin: '0px',
+		threshold: [],
+	};
+
+	const getData = async (pageData: number) => {
+		console.log(pageData);
+		await fetch('https://reqres.in/api/users')
 			.then(response => response.json())
-			.then(result => setDatas(result.data));
+			.then(result => {
+				setDatas(prev => [...prev, ...result.data]);
+			});
+	};
+
+	let callback = (entries: any) => {
+		entries.forEach((entry: any) => {
+			if (entry.isIntersecting) {
+				let pageData = page.current++;
+				getData(pageData);
+			}
+		});
+	};
+
+	let observer = new IntersectionObserver(callback, option);
+
+	useEffect(() => {
+		observer.observe(target.current);
+		console.log('옵저버 연결');
 	}, []);
 
 	return (
@@ -93,21 +133,23 @@ const List = () => {
 				<button>제출</button>
 			</form>
 
-			{infos.map(
-				({ name, email }: { name: string; email: string }, idx: number) => {
-					return (
-						<div key={idx}>
-							{name} 과 {email}
-						</div>
-					);
-				}
-			)}
+			<div>
+				{infos.map(
+					({ name, email }: { name: string; email: string }, idx: number) => {
+						return (
+							<div key={idx}>
+								{name} 과 {email}
+							</div>
+						);
+					}
+				)}
+			</div>
 
 			<button onClick={toPlus}>모달 플러스 버튼</button>
 			{number}
 			<button onClick={toMinus}>모달 마이너스 버튼</button>
-			{datas?.map(({ id, first_name, email, avatar }) => (
-				<Link key={id} to={`/detail/${id}`}>
+			{datas?.map(({ id, first_name, email, avatar }, idx: number) => (
+				<Link key={idx} to={`/detail/${id}`}>
 					<p>
 						<strong>{first_name}</strong>
 					</p>
@@ -115,6 +157,7 @@ const List = () => {
 					<img alt='avatar' src={avatar} />
 				</Link>
 			))}
+			<div ref={target} style={{ width: '10vw', height: '10vh' }} />
 		</>
 	);
 };
