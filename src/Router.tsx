@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-// import List from './pages/List';
 import Detail from './pages/Detail';
 import { Context } from './Context';
 import Promise from './pages/Promise';
-import Modal from './components/modal/Modal';
 import App from './pages/App';
 import Slider from './pages/Slider';
 import Counter from './pages/Counter';
+import Modal from './Components/Modal/Modal';
+import Errors from './pages/Errors';
 
 const Router = () => {
 	return (
@@ -19,6 +19,7 @@ const Router = () => {
 					<Route path='/promise' element={<Promise />} />
 					<Route path='/Modal' element={<Modal />} />
 					<Route path='/slider' element={<Slider />} />
+					<Route path='/error' element={<Errors />} />
 				</Routes>
 			</Context>
 		</BrowserRouter>
