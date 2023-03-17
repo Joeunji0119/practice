@@ -7,6 +7,7 @@ import Slider from './pages/Slider';
 import Counter from './pages/Counter';
 import Modal from './Components/Modal/Modal';
 import Errors from './pages/Errors';
+import Reducer from './pages/Reducer';
 
 const Router = () => {
 	return (
@@ -20,6 +21,7 @@ const Router = () => {
 					<Route path='/Modal' element={<Modal />} />
 					<Route path='/slider' element={<Slider />} />
 					<Route path='/error' element={<Errors />} />
+					<Route path='/reducer' element={<Reducer />} />
 				</Routes>
 			</Context>
 		</BrowserRouter>

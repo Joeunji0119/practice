@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { useCallback, useReducer, useState, useRef } from 'react';
+import { useReducer, useRef } from 'react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useGetData } from '../Context';
+import Comment from './Comment';
 
 const reducer = (state: number, action: { type: string }) => {
 	switch (action.type) {
@@ -19,39 +19,6 @@ const reducer = (state: number, action: { type: string }) => {
 const List = () => {
 	const { datas, setDatas } = useGetData();
 	const [number, dispatch] = useReducer(reducer, 0);
-	const [info, setInfo] = useState({
-		name: '',
-		email: '',
-	});
-
-	const [infos, setInfos] = useState([
-		{
-			name: 'didi',
-			email: 'didi@naver.com',
-		},
-		{
-			name: 'bibi',
-			email: 'bibi@naver.com',
-		},
-		{
-			name: 'wiwi',
-			email: 'wiwi@naver.com',
-		},
-	]);
-
-	const onchange = useCallback(
-		(e: React.ChangeEvent<HTMLInputElement>) => {
-			const { name, value } = e.target;
-
-			const bundleInfo = {
-				...info,
-				[name]: value,
-			};
-
-			setInfo(bundleInfo);
-		},
-		[info]
-	);
 
 	/* 
    매번 함수가 새로 만들어지는 구조라면 최적화 하지 못함
@@ -68,15 +35,6 @@ const List = () => {
 	const toMinus = () => {
 		dispatch({
 			type: 'MINUS',
-		});
-	};
-
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		setInfos(infos => [...infos, info]);
-		setInfo({
-			name: ' ',
-			email: ' ',
 		});
 	};
 
@@ -117,33 +75,10 @@ const List = () => {
 
 	return (
 		<>
-			<form onSubmit={e => handleSubmit(e)}>
-				<input
-					value={info.name}
-					name='name'
-					onChange={e => onchange(e)}
-					placeholder='이름'
-				/>
-				<input
-					value={info.email}
-					name='email'
-					onChange={e => onchange(e)}
-					placeholder='이메일'
-				/>
-				<button>제출</button>
+			<Comment />
+			<form>
+				<input type='file' />
 			</form>
-
-			<div>
-				{infos.map(
-					({ name, email }: { name: string; email: string }, idx: number) => {
-						return (
-							<div key={idx}>
-								{name} 과 {email}
-							</div>
-						);
-					}
-				)}
-			</div>
 
 			<button onClick={toPlus}>모달 플러스 버튼</button>
 			{number}
