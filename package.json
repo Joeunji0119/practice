@@ -1,36 +1,39 @@
 {
-  "name": "dynamic-routing-example",
-  "version": "1.0.0",
-  "description": "",
-  "keywords": [],
-  "main": "src/index.js",
-  "dependencies": {
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
-    "react": "18.0.0",
-    "react-dom": "18.0.0",
-    "react-router-dom": "6.3.0",
-    "react-scripts": "^5.0.1",
-    "react-spring": "^9.6.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  },
-  "devDependencies": {
-    "@babel/preset-typescript": "^7.18.6",
-    "@babel/runtime": "7.13.8",
-    "@types/node": "^18.11.18",
-    "@types/react": "^18.0.27",
-    "@types/react-dom": "^18.0.10",
-    "typescript": "^4.1.3"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+	"name": "dynamic-routing-example",
+	"version": "1.0.0",
+	"description": "",
+	"keywords": [],
+	"main": "src/index.js",
+	"dependencies": {
+		"@emotion/react": "^11.10.5",
+		"@emotion/styled": "^11.10.5",
+		"axios": "^1.3.6",
+		"react": "18.0.0",
+		"react-dom": "18.0.0",
+		"react-router-dom": "6.3.0",
+		"react-scripts": "^5.0.1",
+		"react-spring": "^9.6.1"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test --env=jsdom",
+		"eject": "react-scripts eject",
+		"made": "cd ../../ && mkdir asdf",
+		"erase": "cd ../../ && rm -rf asdf"
+	},
+	"devDependencies": {
+		"@babel/preset-typescript": "^7.18.6",
+		"@babel/runtime": "7.13.8",
+		"@types/node": "^18.11.18",
+		"@types/react": "^18.0.27",
+		"@types/react-dom": "^18.0.10",
+		"typescript": "^4.1.3"
+	},
+	"browserslist": [
+		">0.2%",
+		"not dead",
+		"not ie <= 11",
+		"not op_mini all"
+	]
 }

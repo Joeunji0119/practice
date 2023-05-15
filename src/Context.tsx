@@ -24,5 +24,6 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
 		</DataContext.Provider>
 	);
 };
+// const values = useMemo(() => [datas, setDatas], [datas]);
 
 export const useGetData = () => useContext(DataContext) as DataTypes;

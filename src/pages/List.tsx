@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useReducer, useRef } from 'react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
@@ -73,12 +74,37 @@ const List = () => {
 		console.log('옵저버 연결');
 	}, []);
 
+	// const [test, setTest] = useState(0);
+
+	useEffect(() => {
+		// console.log(setTest);
+
+		// const add = (num: number) => {
+		// 	// let num = 0;
+		// 	setTest((num += 1));
+		// 	requestAnimationFrame(() => {
+		// 		add(num);
+		// 	});
+		// };
+
+		let { data }: any = axios.get(
+			'http://34.22.82.239:8080/getUserList?q=20230101'
+		);
+
+		console.log(data);
+
+		// add(0);
+	}, []);
+
+	// const targetTest = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+	// 	console.log('target :', e.target);
+	// 	console.log('currentTarget :', e.currentTarget);
+	// };
+
 	return (
 		<>
 			<Comment />
-			<form>
-				<input type='file' />
-			</form>
+			<form>{/* <input type='file' /> */}</form>
 
 			<button onClick={toPlus}>모달 플러스 버튼</button>
 			{number}
